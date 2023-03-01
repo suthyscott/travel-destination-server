@@ -12,6 +12,7 @@ module.exports = {
         },
         name: DataTypes.STRING,
         imageURL: DataTypes.TEXT,
-        international: DataTypes.BOOLEAN
+        international: DataTypes.BOOLEAN,
+        notes: DataTypes.STRING(1000)
     })
 }

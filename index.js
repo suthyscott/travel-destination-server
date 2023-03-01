@@ -9,10 +9,11 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const {getDestinations, addDestination} = require('./controller')
+const {getDestinations, addDestination, getSingleDestination} = require('./controller')
 
 app.get('/api/destinations', getDestinations)
 app.post('/api/destinations', addDestination)
+app.get('/api/destination/:destId', getSingleDestination)
 
 sequelize.sync()
 // sequelize.sync({force: true})

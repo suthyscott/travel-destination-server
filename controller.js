@@ -14,13 +14,24 @@ module.exports = {
     addDestination: async (req, res) => {
         console.log("addDestinations")
         try {
-            const { name, imageURL, international } = req.body
+            const { name, imageURL, international, notes } = req.body
             const newDesty = await Destination.create({
                 name,
                 imageURL,
-                international
+                international,
+                notes
             })
             res.status(200).send(newDesty)
+        } catch (err) {
+            console.log(err)
+            res.status(400).send("Error in getDestinations")
+        }
+    },
+    getSingleDestination: async (req, res) => {
+        try {
+            const {destId} = req.params
+            const destination = await Destination.findOne({where: {id: +destId}})
+            res.status(200).send(destination)
         } catch (err) {
             console.log(err)
             res.status(400).send("Error in getDestinations")
