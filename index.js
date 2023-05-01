@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const {Destination} = require('./models/destination')
 const {sequelize} = require('./util/database')
+const {isAuthenticated} = require('./isAuthenticated')
 
 const app = express()
 
@@ -11,9 +12,9 @@ app.use(cors())
 
 const {getDestinations, addDestination, getSingleDestination} = require('./controller')
 
-app.get('/api/destinations', getDestinations)
-app.post('/api/destinations', addDestination)
-app.get('/api/destination/:destId', getSingleDestination)
+app.get('/api/destinations', isAuthenticated, getDestinations)
+app.post('/api/destinations', isAuthenticated, addDestination)
+app.get('/api/destination/:destId', isAuthenticated, getSingleDestination)
 
 sequelize.sync()
 // sequelize.sync({force: true})
