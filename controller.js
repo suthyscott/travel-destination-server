@@ -36,5 +36,15 @@ module.exports = {
             console.log(err)
             res.status(400).send("Error in getDestinations")
         }
+    },
+    deleteDestination: async (req, res) => {
+        try {
+            const {destId} = req.params
+            const destination = await Destination.destroy({where: {id: +destId}})
+            res.sendStatus(200)
+        } catch (err) {
+            console.log(err)
+            res.status(400).send("Error in getDestinations")
+        }
     }
 }

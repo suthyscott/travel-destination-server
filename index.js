@@ -10,11 +10,12 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const {getDestinations, addDestination, getSingleDestination} = require('./controller')
+const {getDestinations, addDestination, getSingleDestination, deleteDestination} = require('./controller')
 
 app.get('/api/destinations', isAuthenticated, getDestinations)
 app.post('/api/destinations', isAuthenticated, addDestination)
 app.get('/api/destination/:destId', isAuthenticated, getSingleDestination)
+app.delete('/api/destinations/:destId', isAuthenticated, deleteDestination)
 
 sequelize.sync()
 // sequelize.sync({force: true})
